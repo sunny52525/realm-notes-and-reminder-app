@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewNoteActivity">
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        android:layout_width="58dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/transparent"
+        app:icon="@drawable/ic_left_arrow"
+        app:iconSize="@dimen/icon_size_back"
+        app:iconTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.google.android.material.button.MaterialButton>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/title_note"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@null"
+        android:hint="Title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton"
+        app:met_hideUnderline="true"
+        app:met_underlineColor="@color/transparent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/current_time_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="02 Nov 2020, 03:49 PM"
+        app:layout_constraintStart_toStartOf="@+id/title_note"
+        app:layout_constraintTop_toBottomOf="@+id/title_note">
+
+    </com.google.android.material.textview.MaterialTextView>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:gravity="start"
+        android:hint="Start Typing Here"
+        android:minHeight="50dp"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="@+id/current_time_note"
+        app:layout_constraintTop_toBottomOf="@+id/current_time_note" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/transparent"
+        android:elevation="11dp"
+        app:cornerRadius="50dp"
+        app:iconSize="@dimen/icon_size_back"
+
+        app:icon="@drawable/ic_tick"
+        app:iconTint="@color/purple"
+        app:layout_constraintBaseline_toBaselineOf="@+id/materialButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent" />
+
+<!--    <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--        android:id="@+id/is_reminder"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:track="@drawable/custom_track"-->
+<!--        android:thumb="@drawable/custom_thumb"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/content">-->
+
+<!--    </com.google.android.material.switchmaterial.SwitchMaterial>-->
+</androidx.constraintlayout.widget.ConstraintLayout>
