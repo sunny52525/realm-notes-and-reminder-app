@@ -1,30 +1,63 @@
 package org.shaun.realmnotesapp
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import io.realm.Realm
 import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.activity_main.*
 import org.shaun.realmnotesapp.modelclass.NotesObject
 private  const val TAG="Main Activity"
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        createChannel("reminder","reminder")
+
+
+        val new_note=findViewById<ExtendedFloatingActionButton>(R.id.new_note)
         new_note.setOnClickListener {
             startActivity(Intent(this,NewNoteActivity::class.java))
         }
 
 
+
         val realm=Realm.getDefaultInstance()
-        realm.beginTransaction()
+        if (!realm.isInTransaction) {
+            realm.beginTransaction()
+        }
         val result=realm.where<NotesObject>().findAll()
         Log.d(TAG, "onCreate: **************************")
         Log.d(TAG, "onCreate: $result")
         Log.d(TAG, "onCreate: **************************")
+        realm.close()
 
     }
+
+    private fun createChannel(channelId: String, channelName: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+                .apply { setShowBadge(false) }
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.RED
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = "Time for breakfast"
+            val notificationManager = getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
+
 }

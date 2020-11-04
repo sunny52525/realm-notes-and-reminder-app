@@ -11,7 +11,8 @@ class MyApp: Application(){
         Realm.init(this)
         val config=RealmConfiguration.Builder()
             .name("NOTES")
-            .schemaVersion(1)
+            .schemaVersion(3)
+            .deleteRealmIfMigrationNeeded()
             .build()
 
         Realm.setDefaultConfiguration(config)

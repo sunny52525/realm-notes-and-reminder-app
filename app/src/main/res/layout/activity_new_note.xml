@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/back_new_note"
         android:layout_width="58dp"
         android:layout_height="46dp"
         android:layout_marginTop="8dp"
@@ -34,7 +34,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton"
+        app:layout_constraintTop_toBottomOf="@+id/back_new_note"
         app:met_hideUnderline="true"
         app:met_underlineColor="@color/transparent" />
 
@@ -49,7 +49,7 @@
     </com.google.android.material.textview.MaterialTextView>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/content"
+        android:id="@+id/note_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="30dp"
@@ -58,7 +58,9 @@
         android:gravity="start"
         android:hint="Start Typing Here"
         android:minHeight="50dp"
+        android:text="@string/lorem"
         android:textAlignment="gravity"
+        app:layout_constraintBottom_toTopOf="@+id/is_reminder"
         app:layout_constraintStart_toStartOf="@+id/current_time_note"
         app:layout_constraintTop_toBottomOf="@+id/current_time_note" />
 
@@ -69,23 +71,38 @@
         android:background="@color/transparent"
         android:elevation="11dp"
         app:cornerRadius="50dp"
-        app:iconSize="@dimen/icon_size_back"
-
         app:icon="@drawable/ic_tick"
+
+        app:iconSize="@dimen/icon_size_back"
         app:iconTint="@color/purple"
-        app:layout_constraintBaseline_toBaselineOf="@+id/materialButton"
+        app:layout_constraintBaseline_toBaselineOf="@+id/back_new_note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <com.google.android.material.switchmaterial.SwitchMaterial-->
-<!--        android:id="@+id/is_reminder"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:track="@drawable/custom_track"-->
-<!--        android:thumb="@drawable/custom_thumb"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/content">-->
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/is_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:thumb="@drawable/ic_add_reminder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/note_content"
+        app:thumbTint="@color/purple"
+        app:track="@drawable/custom_track"
+        app:useMaterialThemeColors="true">
 
-<!--    </com.google.android.material.switchmaterial.SwitchMaterial>-->
+    </com.google.android.material.switchmaterial.SwitchMaterial>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/reminder_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/is_reminder"
+        app:layout_constraintStart_toEndOf="@+id/is_reminder">
+
+    </com.google.android.material.textview.MaterialTextView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
