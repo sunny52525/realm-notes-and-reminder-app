@@ -1,4 +1,4 @@
-package org.shaun.alarm
+package org.shaun.realmnotesapp.notification
 
 import android.app.PendingIntent
 import android.content.BroadcastReceiver

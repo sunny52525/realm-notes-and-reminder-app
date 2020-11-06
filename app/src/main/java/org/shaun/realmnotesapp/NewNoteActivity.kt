@@ -13,8 +13,8 @@ import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment.OnButtonClickLi
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment.SimpleDateMonthAndDayFormatException
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_new_note.*
-import org.shaun.alarm.AlarmSchedule
 import org.shaun.realmnotesapp.modelclass.NotesObject
+import org.shaun.realmnotesapp.notification.AlarmSchedule
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
@@ -26,7 +26,7 @@ class NewNoteActivity : AppCompatActivity() {
 
     private var isReminder = false
     private var reminderDate: Date? = null
-
+    private var dao:NotesDao?=null
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,9 +111,11 @@ class NewNoteActivity : AppCompatActivity() {
     }
 
     private fun saveNote() {
+        val realm = Realm.getDefaultInstance()
+        dao= NotesDao(realm)
         val content = note_content.text.toString()
         val title = title_note.text.toString()
-        val id = System.currentTimeMillis()
+        val id =  dao!!.totalNotesCount()+1
         val newNote = NotesObject()
         newNote.id = id
         newNote.content = content
@@ -121,24 +123,13 @@ class NewNoteActivity : AppCompatActivity() {
         newNote.dateAndTime = current_time_note.text.toString()
         newNote.isReminder = isReminder
         newNote.reminderTime = reminderDate
-        val realm = Realm.getDefaultInstance()
-        try {
-            if (!realm.isInTransaction) {
-                realm.beginTransaction()
-            }
-            val newNoteDB = realm.copyToRealmOrUpdate(newNote)
-            Log.d(TAG, "onCreate: $newNote")
-            realm.commitTransaction()
-            realm.close()
-        } catch (e: Exception) {
-            Log.d(TAG, "onCreate: ${e.message}")
-        }
 
+        dao?.copyOrUpdate(newNote)
         if (isReminder && reminderDate!=null)
             setAlarm()
-
         finish()
     }
+
 
     private fun setAlarm() {
         val intent = Intent(this, AlarmSchedule::class.java)

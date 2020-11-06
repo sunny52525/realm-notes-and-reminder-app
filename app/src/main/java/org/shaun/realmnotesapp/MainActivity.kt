@@ -10,8 +10,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import io.realm.Realm
-import io.realm.kotlin.where
-import org.shaun.realmnotesapp.modelclass.NotesObject
 private  const val TAG="Main Activity"
 class MainActivity : AppCompatActivity() {
 
@@ -30,15 +28,11 @@ class MainActivity : AppCompatActivity() {
 
 
         val realm=Realm.getDefaultInstance()
-        if (!realm.isInTransaction) {
-            realm.beginTransaction()
-        }
-        val result=realm.where<NotesObject>().findAll()
+        val dao=NotesDao(realm)
+        val result=dao.getAllNotes()
         Log.d(TAG, "onCreate: **************************")
         Log.d(TAG, "onCreate: $result")
         Log.d(TAG, "onCreate: **************************")
-        realm.close()
-
     }
 
     private fun createChannel(channelId: String, channelName: String) {
