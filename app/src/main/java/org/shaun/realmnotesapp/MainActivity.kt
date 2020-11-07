@@ -40,13 +40,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-//        val realm=Realm.getDefaultInstance()
-//        val dao= NotesDao(realm)
-//        val result=dao.getAllNotes()
-//        Log.d(TAG, "onCreate: **************************")
-//        Log.d(TAG, "onCreate: $result")
-//        Log.d(TAG, "onCreate: **************************")
     }
 
     private fun createChannel(channelId: String, channelName: String) {
