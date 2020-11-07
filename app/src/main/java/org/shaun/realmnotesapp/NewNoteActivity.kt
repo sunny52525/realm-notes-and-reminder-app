@@ -13,6 +13,7 @@ import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment.OnButtonClickLi
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment.SimpleDateMonthAndDayFormatException
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_new_note.*
+import org.shaun.realmnotesapp.Dao.NotesDao
 import org.shaun.realmnotesapp.modelclass.NotesObject
 import org.shaun.realmnotesapp.notification.AlarmSchedule
 import java.text.SimpleDateFormat
@@ -26,7 +27,7 @@ class NewNoteActivity : AppCompatActivity() {
 
     private var isReminder = false
     private var reminderDate: Date? = null
-    private var dao:NotesDao?=null
+    private var dao: NotesDao?=null
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

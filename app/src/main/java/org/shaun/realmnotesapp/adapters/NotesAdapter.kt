@@ -2,6 +2,7 @@ package org.shaun.realmnotesapp.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,15 +16,15 @@ class NotesAdapter internal constructor(
     context: Context
 ) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
     private val inflater = LayoutInflater.from(context)
-    private val notes = emptyArray<NotesObject>()
+    private var notes = emptyList<NotesObject>()
 
     inner class NotesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val reminderOrNotesIcon: ImageView = itemView.findViewById(R.id.note_type_icon)
         val noteTitle: TextView = itemView.findViewById(R.id.note_title)
-        val noteDate: TextView = itemView.findViewById(R.id.note_title)
+        val noteDate: TextView = itemView.findViewById(R.id.note_date)
         val noteTime: TextView = itemView.findViewById(R.id.note_time)
-        val noteContent: TextView = itemView.findViewById(R.id.note_content)
+        val noteContent: TextView = itemView.findViewById(R.id.note_content_rv)
     }
 
     override fun onCreateViewHolder(
@@ -39,6 +40,8 @@ class NotesAdapter internal constructor(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NotesAdapter.NotesViewHolder, position: Int) {
         val currentNote=notes[position]
+
+        Log.d("TAG", "onBindViewHolder: $currentNote")
         val currentNoteTime=getNoteTime(currentNote.dateAndTime)
         holder.noteTitle.text=currentNote.title
         holder.noteDate.text=currentNoteTime.first
@@ -53,6 +56,11 @@ class NotesAdapter internal constructor(
 
     private fun getNoteTime(dateAndTime: String): Pair<String,String> {
         val separated=dateAndTime.split(",")
+        Log.d("TAG", "getNoteTime: $separated")
         return Pair(separated[0], separated[1])
+    }
+
+    internal fun setNotes(notes:List<NotesObject>){
+        this.notes=notes
     }
 }
