@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.shaun.realmnotesapp.R
 import org.shaun.realmnotesapp.modelclass.NotesObject
+import kotlin.math.min
 
 class NotesAdapter internal constructor(
     context: Context
@@ -39,28 +40,29 @@ class NotesAdapter internal constructor(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NotesAdapter.NotesViewHolder, position: Int) {
-        val currentNote=notes[position]
+        val currentNote = notes[position]
 
         Log.d("TAG", "onBindViewHolder: $currentNote")
-        val currentNoteTime=getNoteTime(currentNote.dateAndTime)
-        holder.noteTitle.text=currentNote.title
-        holder.noteDate.text=currentNoteTime.first
-        holder.noteTime.text=currentNoteTime.second
-        holder.noteContent.text=currentNote.content.substring(0,200)+"......"
-        if(currentNote.isReminder){
+        val currentNoteTime = getNoteTime(currentNote.dateAndTime)
+        holder.noteTitle.text = currentNote.title
+        holder.noteDate.text = currentNoteTime.first
+        holder.noteTime.text = currentNoteTime.second
+        holder.noteContent.text =
+            currentNote.content.substring(0, min(400, currentNote.content.length)) + "......"
+        if (currentNote.isReminder) {
             holder.reminderOrNotesIcon.setImageDrawable(holder.itemView.context.getDrawable(R.drawable.reminder_icon))
-        }else{
+        } else {
             holder.reminderOrNotesIcon.setImageDrawable(holder.itemView.context.getDrawable(R.drawable.ic_notes))
         }
     }
 
-    private fun getNoteTime(dateAndTime: String): Pair<String,String> {
-        val separated=dateAndTime.split(",")
+    private fun getNoteTime(dateAndTime: String): Pair<String, String> {
+        val separated = dateAndTime.split(",")
         Log.d("TAG", "getNoteTime: $separated")
         return Pair(separated[0], separated[1])
     }
 
-    internal fun setNotes(notes:List<NotesObject>){
-        this.notes=notes
+    internal fun setNotes(notes: List<NotesObject>) {
+        this.notes = notes
     }
 }

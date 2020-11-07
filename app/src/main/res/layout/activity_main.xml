@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -13,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Notes App"
 
-        app:titleTextColor="@color/black">
+        app:titleTextColor="@color/blackOrWhite">
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -22,16 +23,18 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
+        app:floatingSearch_leftActionMode="showSearch"
         android:layout_marginTop="64dp"
         android:layout_marginRight="20dp"
         android:hapticFeedbackEnabled="true"
         app:floatingSearch_actionMenuOverflowColor="#F0F1F2"
-        app:floatingSearch_backgroundColor="#F0F1F2"
+        app:floatingSearch_backgroundColor="@color/searchBarColor"
         app:floatingSearch_close_search_on_keyboard_dismiss="true"
         app:floatingSearch_dimBackground="true"
         app:floatingSearch_searchHint="Search Tags"
+
         app:floatingSearch_showSearchKey="false"
-        app:floatingSearch_suggestionRightIconColor="@color/white"
+        app:floatingSearch_suggestionRightIconColor="@color/whiteOrBlack"
         app:floatingSearch_suggestionsListAnimDuration="250"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

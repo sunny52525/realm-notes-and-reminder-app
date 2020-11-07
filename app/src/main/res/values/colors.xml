@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#5F70DF</color>
+    <color name="blackOrWhite">#FF000000</color>
+    <color name="whiteOrBlack">#FFFFFF</color>
+    <color name="rvBackground">#F1F4F4</color>
+    <color name="rvTextColor">#5E5C5C</color>
+    <color name="searchBarColor">#F0F1F2</color>
 </resources>

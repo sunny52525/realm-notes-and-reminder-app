@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blackOrWhite">#FFFFFF</color>
+    <color name="whiteOrBlack">#000000</color>
+
+    <color name="rvBackground">#313333</color>
+    <color name="rvTextColor">#D3CFCF</color>
+    <color name="searchBarColor">#C4CACF</color>
+</resources>
