@@ -9,15 +9,16 @@ import androidx.core.app.NotificationManagerCompat
 import org.shaun.realmnotesapp.MainActivity
 import org.shaun.realmnotesapp.R
 
-class AlarmSchedule:BroadcastReceiver(){
+class AlarmSchedule : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val contentIntent = Intent(context!!, MainActivity::class.java)
-        val pendingIntent= PendingIntent.getActivity(
-            context,101,contentIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(
+            context, 101, contentIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
-        val content=intent?.getStringExtra("content")
-        val title=intent?.getStringExtra("title")
+        val content = intent?.getStringExtra("content")
+        val title = intent?.getStringExtra("title")
         val builder = NotificationCompat.Builder(
 
             context,
@@ -32,8 +33,8 @@ class AlarmSchedule:BroadcastReceiver(){
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        val notificationManager=NotificationManagerCompat.from(context)
-        notificationManager.notify(101,builder.build())
+        val notificationManager = NotificationManagerCompat.from(context)
+        notificationManager.notify(101, builder.build())
     }
 
 

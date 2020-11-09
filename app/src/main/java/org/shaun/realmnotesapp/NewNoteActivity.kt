@@ -29,7 +29,8 @@ class NewNoteActivity : AppCompatActivity() {
 
     private var isReminder = false
     private var reminderDate: Date? = null
-    private var dao: NotesDao?=null
+    private var dao: NotesDao? = null
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,10 +116,10 @@ class NewNoteActivity : AppCompatActivity() {
 
     private fun saveNote() {
         val realm = Realm.getDefaultInstance()
-        dao= NotesDao(realm)
+        dao = NotesDao(realm)
         val content = note_content.text.toString()
         val title = title_note.text.toString()
-        val id =  dao!!.totalNotesCount()+1
+        val id = dao!!.totalNotesCount() + 1
         val newNote = NotesObject()
         newNote.id = id
         newNote.content = content
@@ -127,24 +128,25 @@ class NewNoteActivity : AppCompatActivity() {
         newNote.isReminder = isReminder
         newNote.reminderTime = reminderDate
 
-         NotesViewModel(application).copyOrUpdate(newNote)
-        if (isReminder && reminderDate!=null) {
-            setAlarm(newNote.title,newNote.content)
+        NotesViewModel(application).copyOrUpdate(newNote)
+        if (isReminder && reminderDate != null) {
+            setAlarm(newNote.title, newNote.content)
         }
         finish()
     }
 
 
-    private fun setAlarm(title:String,content:String) {
+    private fun setAlarm(title: String, content: String) {
         val intent = Intent(
-            this, AlarmSchedule::class.java)
+            this, AlarmSchedule::class.java
+        )
 
-        intent.putExtra("title",title)
-        intent.putExtra("content",content.substring(0, min(50,content.length))+"....")
+        intent.putExtra("title", title)
+        intent.putExtra("content", content.substring(0, min(50, content.length)) + "....")
         val pendingIntent = PendingIntent.getBroadcast(this, 101, intent, 0)
         val alarmManger = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        reminderDate?.time?.let { alarmManger.set(AlarmManager.RTC_WAKEUP, it,pendingIntent) }
-      }
+        reminderDate?.time?.let { alarmManger.set(AlarmManager.RTC_WAKEUP, it, pendingIntent) }
+    }
 
     private fun isAmOrPM(): String {
         val now = Calendar.getInstance()

@@ -18,7 +18,7 @@ import kotlin.math.abs
 private const val TAG = "FullNotesFragment"
 
 class FullNotesFragment : Fragment() {
-    private var ID:Long=0
+    private var ID: Long = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,15 +32,16 @@ class FullNotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       //        Log.d(TAG, "onCreateView: $note")
+        //        Log.d(TAG, "onCreateView: $note")
         initViews()
         full_note_delete.setOnClickListener {
-            val viewModel=NotesViewModel(Application())
+            val viewModel = NotesViewModel(Application())
             viewModel.deleteNote(ID)
             activity?.onBackPressed()
 
         }
     }
+
     private fun initViews() {
         val note = this.arguments?.getSerializable("note") as NotesObject
         val titleFullNote = view?.findViewById<TextView>(R.id.title_full_note)
@@ -48,7 +49,7 @@ class FullNotesFragment : Fragment() {
         val contentFullNote = view?.findViewById<TextView>(R.id.content_full_note)
         val isReminderFullNote = view?.findViewById<SwitchCompat>(R.id.is_reminder_full_note)
         val reminderTimeFullNote = view?.findViewById<TextView>(R.id.reminder_time_full_note)
-        ID=note.id
+        ID = note.id
         titleFullNote?.text = note.title
         dateFullNote?.text = note.dateAndTime
         contentFullNote?.text = note.content
@@ -57,22 +58,29 @@ class FullNotesFragment : Fragment() {
             reminderTimeFullNote?.visibility = View.VISIBLE
             Log.d(TAG, "initViews:${note.reminderTime.toString()} ")
             reminderTimeFullNote?.text = note.reminderTime.toString()
-            isReminderFullNote?.isChecked=true
+            isReminderFullNote?.isChecked = true
         }
 
         val updatedNote =
-            NotesObject(note.id,note.title,note.content,note.isReminder,note.dateAndTime,note.reminderTime)
+            NotesObject(
+                note.id,
+                note.title,
+                note.content,
+                note.isReminder,
+                note.dateAndTime,
+                note.reminderTime
+            )
         isReminderFullNote?.setOnClickListener {
-                if(!isReminderFullNote.isChecked){
-                    updatedNote.isReminder=false
-                    updatedNote.reminderTime=null
-                }
+            if (!isReminderFullNote.isChecked) {
+                updatedNote.isReminder = false
+                updatedNote.reminderTime = null
+            }
         }
         save_button_full_note.setOnClickListener {
-            updatedNote.title=titleFullNote?.text.toString()
-            updatedNote.content=contentFullNote?.text.toString()
+            updatedNote.title = titleFullNote?.text.toString()
+            updatedNote.content = contentFullNote?.text.toString()
 
-            val viewModel=NotesViewModel(Application())
+            val viewModel = NotesViewModel(Application())
             viewModel.updateByID(updatedNote)
 
             activity?.onBackPressed()
@@ -119,7 +127,8 @@ class FullNotesFragment : Fragment() {
 
         v.setOnTouchListener({ _, event -> gesture.onTouchEvent(event) })
     }
-    private fun hideKeyboard(){
-        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+    private fun hideKeyboard() {
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 }

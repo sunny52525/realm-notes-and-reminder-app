@@ -19,14 +19,15 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun updateByID(note: NotesObject) {
-            repository.updateByID(note)
+        repository.updateByID(note)
     }
 
-    fun copyOrUpdate(note:NotesObject){
+    fun copyOrUpdate(note: NotesObject) {
         repository.copyOrUpdate(note)
     }
-    fun deleteNote(id:Long){
+
+    fun deleteNote(id: Long) {
         repository.delete(id)
-      }
+    }
 
 }

@@ -5,18 +5,20 @@ import org.shaun.realmnotesapp.Dao.NotesDao
 import org.shaun.realmnotesapp.Dao.RealmLiveData
 import org.shaun.realmnotesapp.modelclass.NotesObject
 
-class NotesRepository(private  val notesDao: NotesDao){
+class NotesRepository(private val notesDao: NotesDao) {
 
-    val allNotes: RealmLiveData<NotesObject> =notesDao.getAllNotes()
+    val allNotes: RealmLiveData<NotesObject> = notesDao.getAllNotes()
 
     fun updateByID(note: NotesObject) {
         notesDao.updateById(note, note.id)
         Log.d(TAG, "updateByID: $allNotes")
     }
-    fun copyOrUpdate(note:NotesObject){
+
+    fun copyOrUpdate(note: NotesObject) {
         notesDao.copyOrUpdate(note)
     }
-    fun delete(id:Long){
+
+    fun delete(id: Long) {
         notesDao.deleteNote(id)
     }
 

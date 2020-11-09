@@ -7,15 +7,15 @@ import java.util.*
 
 open class NotesObject(
     @PrimaryKey
-    var id:Long=0,
-    var title:String="",
-    var content:String="",
-    var isReminder:Boolean=false,
-    var dateAndTime:String="",
-    var reminderTime: Date?=null
-): RealmObject(),Serializable{
+    var id: Long = 0,
+    var title: String = "",
+    var content: String = "",
+    var isReminder: Boolean = false,
+    var dateAndTime: String = "",
+    var reminderTime: Date? = null
+) : RealmObject(), Serializable {
     override fun toString(): String {
-        
+
         return """
             \\\\\\\\\\\\\\\\\\\\\\\\\\
             \n

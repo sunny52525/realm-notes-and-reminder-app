@@ -24,38 +24,39 @@ import org.shaun.realmnotesapp.modelclass.NotesObject
 import org.shaun.realmnotesapp.viewModel.NotesViewModel
 
 
-private  const val TAG="Main Activity"
-class MainActivity : AppCompatActivity(),NotesAdapter.OnHolderClick {
-    private lateinit var notesViewModel:NotesViewModel
+private const val TAG = "Main Activity"
+
+class MainActivity : AppCompatActivity(), NotesAdapter.OnHolderClick {
+    private lateinit var notesViewModel: NotesViewModel
     private var db: RealmResults<NotesObject>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createChannel("reminder","reminder")
+        createChannel("reminder", "reminder")
         val recyclerView = findViewById<RecyclerView>(R.id.notes_recycler_view)
 
-       val adapter = NotesAdapter(this,this)
+        val adapter = NotesAdapter(this, this)
 
-        recyclerView.adapter=adapter
-        recyclerView.layoutManager=LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        notesViewModel=ViewModelProvider(this).get(NotesViewModel::class.java)
-        notesViewModel.allNotes.observe(this, Observer { ok->
+        notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
+        notesViewModel.allNotes.observe(this, Observer { ok ->
             ok?.let {
                 adapter.setNotes(it)
             }
         })
 
-        val new_note=findViewById<ExtendedFloatingActionButton>(R.id.new_note)
+        val new_note = findViewById<ExtendedFloatingActionButton>(R.id.new_note)
         new_note.setOnClickListener {
-            startActivity(Intent(this,NewNoteActivity::class.java))
+            startActivity(Intent(this, NewNoteActivity::class.java))
         }
 
-        db=NotesDao(Realm.getDefaultInstance()).getAllNotesAll()
-          db?.addChangeListener(RealmChangeListener {
-           adapter.notifyDataSetChanged()
-       })
+        db = NotesDao(Realm.getDefaultInstance()).getAllNotesAll()
+        db?.addChangeListener(RealmChangeListener {
+            adapter.notifyDataSetChanged()
+        })
 
     }
 
@@ -90,8 +91,8 @@ class MainActivity : AppCompatActivity(),NotesAdapter.OnHolderClick {
             R.anim.pop_exit
         )
         val bundle = Bundle()
-        bundle.putSerializable("note",note)
-        val newCustomFragment=FullNotesFragment()
+        bundle.putSerializable("note", note)
+        val newCustomFragment = FullNotesFragment()
         newCustomFragment.arguments = bundle
         transaction.replace(R.id.main_activity, newCustomFragment)
         transaction.addToBackStack(null)
