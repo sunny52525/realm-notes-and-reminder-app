@@ -16,6 +16,9 @@ class NotesRepository(private  val notesDao: NotesDao){
     fun copyOrUpdate(note:NotesObject){
         notesDao.copyOrUpdate(note)
     }
+    fun delete(id:Long){
+        notesDao.deleteNote(id)
+    }
 
     companion object {
         private const val TAG = "NotesRepository"

@@ -18,7 +18,7 @@ import kotlin.math.abs
 private const val TAG = "FullNotesFragment"
 
 class FullNotesFragment : Fragment() {
-
+    private var ID:Long=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +34,12 @@ class FullNotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
        //        Log.d(TAG, "onCreateView: $note")
         initViews()
+        full_note_delete.setOnClickListener {
+            val viewModel=NotesViewModel(Application())
+            viewModel.deleteNote(ID)
+            activity?.onBackPressed()
+
+        }
     }
     private fun initViews() {
         val note = this.arguments?.getSerializable("note") as NotesObject
@@ -42,6 +48,7 @@ class FullNotesFragment : Fragment() {
         val contentFullNote = view?.findViewById<TextView>(R.id.content_full_note)
         val isReminderFullNote = view?.findViewById<SwitchCompat>(R.id.is_reminder_full_note)
         val reminderTimeFullNote = view?.findViewById<TextView>(R.id.reminder_time_full_note)
+        ID=note.id
         titleFullNote?.text = note.title
         dateFullNote?.text = note.dateAndTime
         contentFullNote?.text = note.content

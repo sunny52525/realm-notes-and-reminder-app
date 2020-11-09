@@ -70,6 +70,6 @@ class NotesAdapter internal constructor(
     }
 
     internal fun setNotes(notes: List<NotesObject>) {
-        this.notes = notes
+        this.notes = notes.reversed()
     }
 }

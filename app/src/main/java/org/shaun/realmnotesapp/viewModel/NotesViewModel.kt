@@ -25,5 +25,8 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     fun copyOrUpdate(note:NotesObject){
         repository.copyOrUpdate(note)
     }
+    fun deleteNote(id:Long){
+        repository.delete(id)
+      }
 
 }
