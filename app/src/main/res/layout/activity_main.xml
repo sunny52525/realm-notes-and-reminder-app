@@ -8,15 +8,34 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/floating_search_view"
+        app:layout_constraintEnd_toStartOf="@+id/nightMode"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Notes App"
 
+        app:layout_constraintVertical_bias="0.0"
+        app:title="Notes App"
         app:titleTextColor="@color/blackOrWhite">
 
+
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/nightMode"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:backgroundTint="@color/whiteOrBlack"
+        android:thumb="@drawable/ic_day_and_night"
+        app:layout_constraintBottom_toTopOf="@+id/floating_search_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:track="@drawable/custom_track"
+        app:useMaterialThemeColors="true">
+
+    </androidx.appcompat.widget.SwitchCompat>
 
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/floating_search_view"
