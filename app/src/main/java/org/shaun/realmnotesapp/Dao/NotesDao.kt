@@ -1,3 +1,4 @@
+
 package org.shaun.realmnotesapp.Dao
 
 import io.realm.Realm

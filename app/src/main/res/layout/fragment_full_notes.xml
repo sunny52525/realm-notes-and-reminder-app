@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteOrBlack"
+    android:clickable="true"
+    android:elevation="10dp"
+    tools:context=".fragment.FullNotesFragment"
+    android:focusable="true">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title_full_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:textSize="40sp"
+            android:layout_marginTop="32dp"
+            android:background="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date_full_note"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/title_full_note"
+            app:layout_constraintTop_toBottomOf="@+id/title_full_note">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/content_full_note"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/blackOrWhite"
+            app:layout_constraintBottom_toTopOf="@+id/is_reminder_full_note"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="gravity"
+            android:gravity="start"
+            android:background="@null"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/date_full_note"
+            app:layout_constraintTop_toBottomOf="@+id/date_full_note">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+        <ImageView
+            android:id="@+id/is_reminder_full_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/reminder_icon"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/content_full_note">
+
+        </ImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/reminder_time_full_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/is_reminder_full_note"
+            app:layout_constraintStart_toEndOf="@+id/is_reminder_full_note"
+            app:layout_constraintTop_toTopOf="@+id/is_reminder_full_note">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>

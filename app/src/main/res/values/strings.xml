@@ -5,4 +5,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non gravida risus. M
 
 Curabitur tincidunt nisi vitae consequat mollis. Donec varius vel magna sed convallis. Sed aliquam sagittis lectus a consequat. Cras eget lorem diam. Nullam orci nulla, convallis at aliquam nec, condimentum in nibh. Sed imperdiet, metus quis consequat scelerisque, lorem elit ultricies dolor, ac scelerisque velit magna eget ligula. Etiam non lectus eleifend, rhoncus nisl id, accumsan velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc semper leo lacinia, efficitur nisl in, rutrum ipsum. Proin quis leo lorem. Cras vitae mi eu purus ultricies pellentesque sed vitae nibh. Donec vestibulum tellus vitae laoreet auctor. Vivamus in euismod felis. Suspendisse eu tincidunt tortor, ac consectetur purus.</string>
     <string name="channelName">reminder</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

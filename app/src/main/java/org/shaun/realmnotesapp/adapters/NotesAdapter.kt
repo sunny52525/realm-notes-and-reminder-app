@@ -14,11 +14,14 @@ import org.shaun.realmnotesapp.modelclass.NotesObject
 import kotlin.math.min
 
 class NotesAdapter internal constructor(
-    context: Context
+    context: Context,private val listener:OnHolderClick
 ) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
     private val inflater = LayoutInflater.from(context)
     private var notes = emptyList<NotesObject>()
 
+    interface OnHolderClick{
+        fun notesClicked(note:NotesObject)
+    }
     inner class NotesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val reminderOrNotesIcon: ImageView = itemView.findViewById(R.id.note_type_icon)
@@ -53,6 +56,10 @@ class NotesAdapter internal constructor(
             holder.reminderOrNotesIcon.setImageDrawable(holder.itemView.context.getDrawable(R.drawable.reminder_icon))
         } else {
             holder.reminderOrNotesIcon.setImageDrawable(holder.itemView.context.getDrawable(R.drawable.ic_notes))
+        }
+
+        holder.itemView.setOnClickListener {
+            listener.notesClicked(currentNote)
         }
     }
 

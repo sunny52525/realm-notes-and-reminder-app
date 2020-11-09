@@ -2,6 +2,7 @@ package org.shaun.realmnotesapp.modelclass
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 open class NotesObject(
@@ -12,7 +13,7 @@ open class NotesObject(
     var isReminder:Boolean=false,
     var dateAndTime:String="",
     var reminderTime: Date?=null
-): RealmObject(){
+): RealmObject(),Serializable{
     override fun toString(): String {
         
         return """

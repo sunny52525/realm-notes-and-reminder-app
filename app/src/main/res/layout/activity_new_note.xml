@@ -57,11 +57,12 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:background="@null"
-        android:gravity="start"
+
         android:hint="Start Typing Here"
         android:minHeight="50dp"
         android:text="@string/lorem"
         android:textAlignment="gravity"
+        android:gravity="start"
         app:layout_constraintBottom_toTopOf="@+id/is_reminder"
         app:layout_constraintStart_toStartOf="@+id/current_time_note"
         app:layout_constraintTop_toBottomOf="@+id/current_time_note" />
