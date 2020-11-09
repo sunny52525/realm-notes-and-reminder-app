@@ -60,7 +60,6 @@
 
         android:hint="Start Typing Here"
         android:minHeight="50dp"
-        android:text="@string/lorem"
         android:textAlignment="gravity"
         android:gravity="start"
         app:layout_constraintBottom_toTopOf="@+id/is_reminder"

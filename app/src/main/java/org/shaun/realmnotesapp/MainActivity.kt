@@ -31,7 +31,6 @@ import org.shaun.realmnotesapp.viewModel.NotesViewModel
 
 private const val TAG = "Main Activity"
 
-private var darkMode = true
 
 class MainActivity : AppCompatActivity(), NotesAdapter.OnHolderClick {
     private lateinit var notesViewModel: NotesViewModel
@@ -62,22 +61,8 @@ class MainActivity : AppCompatActivity(), NotesAdapter.OnHolderClick {
         }
 
         nightMode.setOnCheckedChangeListener { buttonView, isChecked ->
-            val isNightTheme =
-                resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-            when (isNightTheme) {
-                Configuration.UI_MODE_NIGHT_YES -> {
-                    darkMode = false
-                }
-                Configuration.UI_MODE_NIGHT_NO -> {
-                    darkMode = true
-                }
-            }
-
-            nightMode(darkMode)
-            val themePreference:SharedPreferences=getSharedPreferences("userTheme", Context.MODE_PRIVATE)
-            val editor=themePreference.edit()
-            editor.putBoolean("userTheme", darkMode)
-            editor.apply()
+            nightMode(isChecked)
+            setThemePreference(isChecked)
         }
 
 
@@ -127,30 +112,41 @@ class MainActivity : AppCompatActivity(), NotesAdapter.OnHolderClick {
         transaction.commit()
     }
 
-    private fun initTheme(){
-        val themepref: SharedPreferences =getSharedPreferences("userTheme", Context.MODE_PRIVATE)
-        val editor=themepref.edit()
-
-        if(themepref.contains("userTheme")){
-            darkMode = themepref.getBoolean("userTheme",false)
-        }else{
+    private fun initTheme() {
+        val themePreference: SharedPreferences =
+            getSharedPreferences("userTheme", Context.MODE_PRIVATE)
+        val isDarkMode: Boolean
+        if (themePreference.contains("userTheme")) {
+            isDarkMode = getThemePreference()
+        } else {
             val isNightTheme =
                 resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-            darkMode = isNightTheme== Configuration.UI_MODE_NIGHT_YES
-            editor.putBoolean("userTheme",false)
-            editor.apply()
+            isDarkMode = isNightTheme == Configuration.UI_MODE_NIGHT_YES
+            setThemePreference(false)
         }
-        nightMode(darkMode)
+        nightMode(isDarkMode)
 
     }
 
-    private fun nightMode(on:Boolean){
-        nightMode.isChecked= on
-        if(on)
+    private fun nightMode(on: Boolean) {
+        nightMode.isChecked = on
+        if (on)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
     }
 
+    private fun setThemePreference(theme: Boolean) {
+        val themePreference: SharedPreferences =
+            getSharedPreferences("userTheme", Context.MODE_PRIVATE)
+        val editor = themePreference.edit()
+        editor.putBoolean("userTheme", theme)
+        editor.apply()
+    }
+
+    private fun getThemePreference(): Boolean {
+        val themePreference: SharedPreferences =
+            getSharedPreferences("userTheme", Context.MODE_PRIVATE)
+        return themePreference.getBoolean("userTheme", false)
+    }
 }
