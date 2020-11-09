@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_new_note.*
 import org.shaun.realmnotesapp.Dao.NotesDao
 import org.shaun.realmnotesapp.modelclass.NotesObject
 import org.shaun.realmnotesapp.notification.AlarmSchedule
+import org.shaun.realmnotesapp.viewModel.NotesViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
@@ -125,7 +126,8 @@ class NewNoteActivity : AppCompatActivity() {
         newNote.isReminder = isReminder
         newNote.reminderTime = reminderDate
 
-        dao?.copyOrUpdate(newNote)
+//        dao?.copyOrUpdate(newNote)
+         NotesViewModel(application).copyOrUpdate(newNote)
         if (isReminder && reminderDate!=null)
             setAlarm()
         finish()

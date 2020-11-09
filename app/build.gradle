@@ -82,4 +82,7 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
+//    realm adpaper
+    compile 'io.realm:android-adapters:3.1.0'
+
 }

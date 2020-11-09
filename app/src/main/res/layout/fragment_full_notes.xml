@@ -7,23 +7,39 @@
     android:background="@color/whiteOrBlack"
     android:clickable="true"
     android:elevation="10dp"
-    tools:context=".fragment.FullNotesFragment"
-    android:focusable="true">
+    android:focusable="true"
+    tools:context=".fragment.FullNotesFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save_button_full_note"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@color/transparent"
+            android:elevation="11dp"
+            app:cornerRadius="50dp"
+            app:icon="@drawable/ic_tick"
+
+            app:iconSize="@dimen/icon_size_back"
+            app:iconTint="@color/purple"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.925"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/title_full_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
-            android:textSize="40sp"
             android:layout_marginTop="32dp"
             android:background="@null"
+            android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -45,38 +61,40 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:gravity="start"
+            android:textAlignment="gravity"
             android:textColor="@color/blackOrWhite"
             app:layout_constraintBottom_toTopOf="@+id/is_reminder_full_note"
-            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textAlignment="gravity"
-            android:gravity="start"
-            android:background="@null"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/date_full_note"
             app:layout_constraintTop_toBottomOf="@+id/date_full_note">
 
         </com.google.android.material.textfield.TextInputEditText>
 
-        <ImageView
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/is_reminder_full_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/reminder_icon"
+            android:thumb="@drawable/ic_add_reminder"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/content_full_note">
+            app:layout_constraintStart_toStartOf="@+id/content_full_note"
+            app:thumbTint="@color/purple"
+            app:track="@drawable/custom_track">
 
-        </ImageView>
+        </com.google.android.material.switchmaterial.SwitchMaterial>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/reminder_time_full_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
             android:layout_marginStart="10dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/is_reminder_full_note"
             app:layout_constraintStart_toEndOf="@+id/is_reminder_full_note"
             app:layout_constraintTop_toTopOf="@+id/is_reminder_full_note">
@@ -84,7 +102,6 @@
         </com.google.android.material.textview.MaterialTextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </FrameLayout>

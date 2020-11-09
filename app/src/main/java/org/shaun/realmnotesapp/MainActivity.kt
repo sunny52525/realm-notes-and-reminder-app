@@ -14,6 +14,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import io.realm.Realm
+import io.realm.RealmChangeListener
+import io.realm.RealmResults
+import org.shaun.realmnotesapp.Dao.NotesDao
 import org.shaun.realmnotesapp.adapters.NotesAdapter
 import org.shaun.realmnotesapp.fragment.FullNotesFragment
 import org.shaun.realmnotesapp.modelclass.NotesObject
@@ -23,20 +27,24 @@ import org.shaun.realmnotesapp.viewModel.NotesViewModel
 private  const val TAG="Main Activity"
 class MainActivity : AppCompatActivity(),NotesAdapter.OnHolderClick {
     private lateinit var notesViewModel:NotesViewModel
-
+    private var db: RealmResults<NotesObject>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createChannel("reminder","reminder")
         val recyclerView = findViewById<RecyclerView>(R.id.notes_recycler_view)
-        val adapter=NotesAdapter(this,this)
+
+       val adapter = NotesAdapter(this,this)
+
         recyclerView.adapter=adapter
         recyclerView.layoutManager=LinearLayoutManager(this)
 
         notesViewModel=ViewModelProvider(this).get(NotesViewModel::class.java)
         notesViewModel.allNotes.observe(this, Observer { ok->
-            ok?.let { adapter.setNotes(it) }
+            ok?.let {
+                adapter.setNotes(it)
+            }
         })
 
         val new_note=findViewById<ExtendedFloatingActionButton>(R.id.new_note)
@@ -44,6 +52,10 @@ class MainActivity : AppCompatActivity(),NotesAdapter.OnHolderClick {
             startActivity(Intent(this,NewNoteActivity::class.java))
         }
 
+        db=NotesDao(Realm.getDefaultInstance()).getAllNotesAll()
+          db?.addChangeListener(RealmChangeListener {
+           adapter.notifyDataSetChanged()
+       })
 
     }
 

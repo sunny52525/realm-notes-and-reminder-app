@@ -1,14 +1,17 @@
 package org.shaun.realmnotesapp.fragment
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.GestureDetector.SimpleOnGestureListener
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_full_notes.*
 import org.shaun.realmnotesapp.R
 import org.shaun.realmnotesapp.modelclass.NotesObject
+import org.shaun.realmnotesapp.viewModel.NotesViewModel
 import kotlin.math.abs
 
 
@@ -29,15 +32,15 @@ class FullNotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val note = this.arguments?.getSerializable("note") as NotesObject
-//        Log.d(TAG, "onCreateView: $note")
-        initViews(note)
+       //        Log.d(TAG, "onCreateView: $note")
+        initViews()
     }
-    private fun initViews(note: NotesObject) {
+    private fun initViews() {
+        val note = this.arguments?.getSerializable("note") as NotesObject
         val titleFullNote = view?.findViewById<TextView>(R.id.title_full_note)
         val dateFullNote = view?.findViewById<TextView>(R.id.date_full_note)
         val contentFullNote = view?.findViewById<TextView>(R.id.content_full_note)
-        val isReminderFullNote = view?.findViewById<ImageView>(R.id.is_reminder_full_note)
+        val isReminderFullNote = view?.findViewById<SwitchCompat>(R.id.is_reminder_full_note)
         val reminderTimeFullNote = view?.findViewById<TextView>(R.id.reminder_time_full_note)
         titleFullNote?.text = note.title
         dateFullNote?.text = note.dateAndTime
@@ -47,6 +50,27 @@ class FullNotesFragment : Fragment() {
             reminderTimeFullNote?.visibility = View.VISIBLE
             Log.d(TAG, "initViews:${note.reminderTime.toString()} ")
             reminderTimeFullNote?.text = note.reminderTime.toString()
+            isReminderFullNote?.isChecked=true
+        }
+
+        val updatedNote =
+            NotesObject(note.id,note.title,note.content,note.isReminder,note.dateAndTime,note.reminderTime)
+        isReminderFullNote?.setOnClickListener {
+                if(!isReminderFullNote.isChecked){
+                    updatedNote.isReminder=false
+                    updatedNote.reminderTime=null
+                }
+        }
+        save_button_full_note.setOnClickListener {
+            updatedNote.title=titleFullNote?.text.toString()
+            updatedNote.content=contentFullNote?.text.toString()
+
+            val viewModel=NotesViewModel(Application())
+            viewModel.updateByID(updatedNote)
+
+            activity?.onBackPressed()
+
+            hideKeyboard()
         }
 
     }
@@ -88,6 +112,7 @@ class FullNotesFragment : Fragment() {
 
         v.setOnTouchListener({ _, event -> gesture.onTouchEvent(event) })
     }
-
-
+    private fun hideKeyboard(){
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
 }
