@@ -15,6 +15,9 @@ class AlarmSchedule:BroadcastReceiver(){
         val pendingIntent= PendingIntent.getActivity(
             context,101,contentIntent,
             PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val content=intent?.getStringExtra("content")
+        val title=intent?.getStringExtra("title")
         val builder = NotificationCompat.Builder(
 
             context,
@@ -23,9 +26,9 @@ class AlarmSchedule:BroadcastReceiver(){
             .setOnlyAlertOnce(true)
 
             .setSmallIcon(R.drawable.reminder_icon)
-            .setContentTitle("Reminder") //TODO
+            .setContentTitle(title)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentText("Hey this was a test") //TODO
+            .setContentText(content)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 

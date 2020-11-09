@@ -20,6 +20,7 @@ import org.shaun.realmnotesapp.viewModel.NotesViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
+import kotlin.math.min
 
 
 private const val TAG = "NewNoteActivity"
@@ -126,20 +127,24 @@ class NewNoteActivity : AppCompatActivity() {
         newNote.isReminder = isReminder
         newNote.reminderTime = reminderDate
 
-//        dao?.copyOrUpdate(newNote)
          NotesViewModel(application).copyOrUpdate(newNote)
-        if (isReminder && reminderDate!=null)
-            setAlarm()
+        if (isReminder && reminderDate!=null) {
+            setAlarm(newNote.title,newNote.content)
+        }
         finish()
     }
 
 
-    private fun setAlarm() {
-        val intent = Intent(this, AlarmSchedule::class.java)
+    private fun setAlarm(title:String,content:String) {
+        val intent = Intent(
+            this, AlarmSchedule::class.java)
+
+        intent.putExtra("title",title)
+        intent.putExtra("content",content.substring(0, min(50,content.length))+"....")
         val pendingIntent = PendingIntent.getBroadcast(this, 101, intent, 0)
         val alarmManger = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        reminderDate?.time?.let { alarmManger.set(AlarmManager.RTC_WAKEUP, it, pendingIntent) }
-    }
+        reminderDate?.time?.let { alarmManger.set(AlarmManager.RTC_WAKEUP, it,pendingIntent) }
+      }
 
     private fun isAmOrPM(): String {
         val now = Calendar.getInstance()
