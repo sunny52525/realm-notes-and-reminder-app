@@ -23,8 +23,8 @@ class NotesDao : Dao<NotesObject> {
         return db?.where<NotesObject>()!!.findAllAsync()
     }
 
-    fun findNoteById(id: Int): NotesObject {
-        return db?.where<NotesObject>()!!.findAll()[id]!!
+    fun findNoteById(id: Long): NotesObject {
+        return db?.where<NotesObject>()!!.equalTo("id",id).findFirst()!!
     }
 
     fun totalNotesCount() = db?.where<NotesObject>()!!.findAll().size.toLong()

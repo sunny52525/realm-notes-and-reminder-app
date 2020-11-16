@@ -119,7 +119,7 @@ class NewNoteActivity : AppCompatActivity() {
         dao = NotesDao(realm)
         val content = note_content.text.toString()
         val title = title_note.text.toString()
-        val id = dao!!.totalNotesCount() + 1
+        val id = System.currentTimeMillis()
         val newNote = NotesObject()
         newNote.id = id
         newNote.content = content
